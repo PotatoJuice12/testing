@@ -1,0 +1,112 @@
+import java.util.Scanner;
+
+
+
+public class Main {
+
+	public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
+		  Scanner pantat = new Scanner(System.in);
+		  System.out.println("Welcome To LAburi Hotpot");
+		  System.out.println("==========================");
+		  System.out.println("1. Order Hotpot");
+		  System.out.println("2. Exit");
+		  System.out.println("Choose Menu : ");
+		  
+	int menu = 0;
+		menu = scan.nextInt();scan.nextLine();
+switch (menu) {
+	case 1:
+	String name;
+		do {
+			System.out.println("Please Enter Your Name .... ");
+			name = scan.nextLine();
+		} while (name.length()<4);
+		
+	String soupflav;
+		do {
+			System.out.println("Please Choose Your Soup Base [ Tom Yum Base | Mushroom Base | Beef Collagen Base](case sensitive) .... ");
+			soupflav = scan.nextLine();
+		} while (!soupflav.contains("Tom Yum Base") && !soupflav.contains("Mushroom Base") && !soupflav.contains("Beef Collagen Base"));
+	
+	String noodtype;
+		do {
+			System.out.println("Please Choose Your Noodle Type [ Udon Noodles | Shirataki Noodles | Egg Noodles](case sensitive) .... ");
+			noodtype = scan.nextLine();
+		} while (!noodtype.contains("Egg Noodles")&& !noodtype.contains("Udon Noodles")&& !noodtype.contains("Shirataki Noodles"));
+	String meatballtype;
+		do {
+			System.out.println("Please Choose Your Meatball Type [ Beef Meatball | Fish Meatball | Fried Meatball](case sensitive) .... ");
+			meatballtype = scan.nextLine();
+		} while (!meatballtype.contains("Fish Meatball")&& !meatballtype.contains("Fried Meatball")&& !meatballtype.contains("Beef Meatball"));
+	int meatballamt;
+		do {
+			System.out.println("Input The Amount of Meatball [1-10]");
+			meatballamt = scan.nextInt(); scan.nextLine();
+		} while (meatballamt>10||meatballamt<1);
+	String meattype;
+		do {
+			System.out.println("Choose Your Meat Type [ Chicken | Beef | Shrimp | Fish ](case sensitive) .... ");
+			meattype = scan.nextLine();
+		} while (!meattype.contains("Chicken")&& !meattype.contains("Beef")&& !meattype.contains("Shrimp")&& !meattype.contains("Fish"));
+	int meatwgt;
+		do {
+			System.out.println("How much meat do you want? [10-100 grams]");
+			meatwgt = scan.nextInt();scan.nextLine();
+		} while (meatwgt>100||meatwgt<10);
+	String vegetype;
+		do {
+			System.out.println("Choose Your Vegetable Type [Cabbage | Mushroom | Broccoli](case sensitive) .... ");
+			vegetype = scan.nextLine();
+		} while (!vegetype.contains("Cabbage")&& !vegetype.contains("Mushroom")&& !vegetype.contains("Broccoli"));
+	int noodwgt = 0;
+		if(noodtype.contains("Shirataki Noodles"))
+			noodwgt = 60;
+		else if(noodtype.contains("Egg Noodles"))
+			noodwgt = 70;
+		else if(noodtype.contains("Udon Noodles"))
+			noodwgt = 90;
+	int meatballwgt = 0;
+		if(meatballtype.contains("Fish Meatball"))
+			meatballwgt = 4;
+		else if(meatballtype.contains("Beef Meatball"))
+			meatballwgt = 5;
+		else if(meatballtype.contains("Fried Meatball"))
+			meatballwgt = 7;
+	int vegewgt = 0;
+		if(vegetype.contains("Cabbage"))
+			vegewgt = 20;
+		else if(vegetype.contains("Mushroom"))
+			vegewgt = 20;
+		else if(vegetype.contains("Broccoli"))
+			vegewgt = 20;
+	int totalwgt = noodwgt +(meatballwgt * meatballamt) + meatwgt + vegewgt;
+	int totalprc = 50000 + ((totalwgt - 90)*2000);
+
+	System.out.println("Name           : " +name);
+	System.out.println("Soup Base      : " +soupflav);
+	System.out.println("Meatball       : " +meatballamt + " pc(s) " +meatballtype);
+	System.out.println("Meat           : " +meatwgt +" gr "+ meattype);
+	System.out.println("Vegetable      : "+vegetype);
+	System.out.println("Total Weight   : "+totalwgt);
+	System.out.println("Total Price    : "+totalprc);
+	
+	System.out.println("Thanks for ordering LAburi!!");
+	break;
+	case 2:
+		System.out.println("Thanks for visiting LAburi!!");
+
+
+			
+	
+	
+	
+	
+	
+	
+	
+	
+
+}
+}
+}
