@@ -1,0 +1,176 @@
+import java.util.Scanner;
+import java.util.Vector;
+
+public class Main {
+	Scanner scan = new Scanner(System.in);
+	Vector<String> Names = new Vector<String>();
+	Vector<String> FoodC = new Vector<String>();
+	Vector<String> FoodT = new Vector<String>();
+	Vector<String> FoodN = new Vector<String>();
+	Vector<Integer> Prices = new Vector<Integer>();
+	public Main() {
+		int menu = 0;
+		Names.add("Mr. Budi");
+		FoodC.add("Lunch");
+		FoodT.add("Food");
+		FoodN.add("kontolgoreng");
+		Prices.add(15000);
+		
+		Names.add("Mr. ujun");
+		FoodC.add("breakfast");
+		FoodT.add("Beverages");
+		FoodN.add("cimolblender");
+		Prices.add(25000);
+		
+		do {
+			System.out.println("Restaurant");
+			System.out.println("1. Insert Order");
+			System.out.println("2. Update Order");
+			System.out.println("3. Delete Order");
+			System.out.println("4. Checkout");
+			System.out.println("5. Exit");
+			menu = scan.nextInt();
+			scan.nextLine();
+		
+			if (menu == 1) {
+				InsertOrder();
+			}
+			else if(menu == 2) {
+				UpdateOrder();
+			}
+			else if(menu == 3) {
+				DeleteOrder();
+			}
+			else if(menu == 4) {
+				Checkout();
+			}
+				
+			} while (menu !=5);
+		
+			}
+			void InsertOrder() {
+				String name = "";
+				String foodcat = "";				
+				String foodtype = "";
+				String foodname = "";
+				Integer foodprice = 0;
+				do {
+					System.out.println("Name : ");
+					System.out.println("(Mr / Mrs)");
+					name = scan.nextLine();
+				} while (!name.startsWith("Mr") 
+						&& !name.startsWith("Mrs"));
+				do {
+					System.out.println("Kategori Makanan : ");
+					System.out.println("(Breakfast, Lunch, Dinner)(Case Insensitive)");
+					foodcat = scan.nextLine();
+				} while (!foodcat.equalsIgnoreCase("Breakfast")
+						&& !foodcat.equalsIgnoreCase("Lunch")
+						&&!foodcat.equalsIgnoreCase("Dinner"));
+				
+				
+				
+				do {
+					System.out.println("Tipe Makanan : ");
+					System.out.println("(Food, Beverages, Snack)(Case Sensitive)");
+					foodtype = scan.nextLine();
+				} while (!foodtype.equals("Food") 
+						&& !foodtype.equals("Beverages") 
+						&& !foodtype.equals("Snack"));
+				do {
+					System.out.println("Nama Makanan : ");
+					foodname = scan.next();
+				} while (foodname.length() < 5 || foodname.length() > 20 
+						|| FoodN.contains(foodname));
+				do {
+					System.out.println("Harga Makanan :");
+					foodprice = scan.nextInt();
+					scan.nextLine();
+				} while (foodprice < 10000);
+				
+				Names.add(name);
+				FoodC.add(foodcat);
+				FoodT.add(foodtype);
+				FoodN.add(foodname);
+				Prices.add(foodprice);
+				
+				System.out.println("Oke");
+				
+			}
+			
+			void Checkout() {
+				String input;
+				int totalPrice = 0;
+				
+				for (int i = 0; i < Prices.size(); i++) {
+					totalPrice += Prices.get(i);
+					
+				}
+
+				
+				do {
+					System.out.println("Are you sure you want to checkout?" + "(Yes/No)");
+					System.out.println("Total Price : " + totalPrice);
+					input = scan.nextLine();
+				} while (!input.equals("Yes") && !input.equals("No"));
+				if (input.equals("Yes")) {
+					Names.clear();
+					FoodC.clear();
+					FoodT.clear();
+					FoodN.clear();
+					Prices.clear();
+				}
+				
+			}
+			void PrintOrder() {
+				for(int i = 0; i < Names.size(); i++) {
+					System.out.println("Name : " + Names.get(i));
+					System.out.println("Kategori Makanan : " + FoodC.get(i));
+					System.out.println("Tipe Makanan : " + FoodT.get(i));
+					System.out.println("Nama Makanan : " + FoodN.get(i));
+					System.out.println("Harga Makanan : " + Prices.get(i));
+					System.out.println("===================");
+				}
+			}
+			void UpdateOrder() {	
+				PrintOrder();
+				int idx = 0;
+				do {
+					System.out.println("Select Order : ");
+					idx = scan.nextInt();
+					scan.nextLine();
+				} while (idx < 1 || idx > Names.size());
+				
+				String name = "";
+				
+				do {
+					System.out.println("Name : ");
+					System.out.println("(Mr / Mrs)");
+					name = scan.nextLine();
+				} while (!name.startsWith("Mr") 
+						&& !name.startsWith("Mrs"));
+				Names.set(idx - 1, name);
+			}
+			
+			void DeleteOrder() {
+				PrintOrder();
+				int idx = 0;
+				do {
+					System.out.println("Select Order : ");
+					idx = scan.nextInt();
+					scan.nextLine();
+				} while (idx < 1 || idx > Names.size());
+				
+				Names.remove(idx - 1);
+				FoodC.remove(idx - 1);
+				FoodT.remove(idx - 1);
+				FoodN.remove(idx - 1);
+				Prices.remove(idx - 1);
+			}
+
+	public static void main(String[] args) {
+		new Main();
+
+	}
+
+}
