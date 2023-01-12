@@ -1,0 +1,168 @@
+package Main;
+
+import java.util.Random;
+import java.util.Scanner;
+import java.util.Vector;
+
+
+public class subMain {
+	Random rd = new Random ();
+	Scanner scan = new Scanner (System.in);
+	Vector<String> titles = new Vector();
+	Vector<String> genres = new Vector();
+	Vector<Integer> rates = new Vector();
+	Vector<String> ids = new Vector();
+	Vector<Integer> prices = new Vector();
+	int scanint () {
+		int temp = -1;
+		try {
+			temp = scan.nextInt();
+		} catch (Exception e) {
+			System.out.println("Input must be numeric!");
+		}
+		scan.nextLine();
+		return temp;
+	}
+	public subMain() {
+		int choose;
+		do {
+			System.out.println("=============");
+			System.out.println(" MOVIE RENTAL ");
+			System.out.println("=============");
+			System.out.println("Add new Movie");
+			System.out.println("View Movie (Sort by Title Ascending)");
+			System.out.println("Rent Movie");
+			System.out.println("4. EXIT");
+			System.out.print(">>");
+			choose = scanint();
+			switch (choose) {
+			case 1:
+				input();
+				break;
+			case 2:
+				view();
+				break;
+			case 3:
+				rent();
+				break;
+			}
+		} while (choose !=4);
+	}
+	private void input () {
+		String name, genre, id;
+		int rate, add = 0, total;
+		do {
+			System.out.println("Input Movie Title [3-20]: ");
+			name = scan.nextLine();
+		} while (name.length()<3 || name.length()>20);
+		do {
+			System.out.println("Input Movie Genre [Horror|Comedy|Action](casesens): ");
+			genre = scan.nextLine();
+		} while (!genre.equals("Horror") && !genre.equals("Comedy")
+				&& !genre.equals("Action"));
+		do {
+			System.out.println("Enter Movie Rating [1-10]: ");
+			rate = scan.nextInt();
+				scan.nextLine();
+		} while (rate<1||rate>10);
+		char a = (char)(rd.nextInt(26)+'A');
+		char b = (char)(rd.nextInt(26)+'A');
+		int c = rd.nextInt(10);
+		int d = rd.nextInt(10);
+		int e = rd.nextInt(10);
+		
+		id = String.valueOf(a)+String.valueOf(b)
+		+String.valueOf(c)+String.valueOf(d)+String.valueOf(e);
+		if (genre.equals("Comedy")) {
+			add = 3000;
+		}
+		if (genre.equals("Horror")) {
+			add = 5000;
+		}
+		if (genre.equals("Action")) {
+			add = 4000;
+		}
+		
+		total = (name.length()*5000)+add;
+		System.out.println("Insert Success");
+		titles.add(name);
+		genres.add(genre);
+		rates.add(rate);
+		prices.add(total);
+		ids.add(id);
+		sort();
+	}
+	private void sort() {
+		for (int i = 0; i < titles.size(); i++) {
+			for (int j = 0; j < titles.size()-1; j++) {
+				if (titles.get(j).compareTo(titles.get(j+1))>0) {
+					String temp = titles.get(j);
+					titles.set(j, titles.get(j+1));
+					titles.set(j+1, temp);
+					
+					String temp1 = ids.get(j);
+					ids.set(j, ids.get(j+1));
+					ids.set(j+1, temp1);
+					
+					String temp2 = genres.get(j);
+					genres.set(j, genres.get(j+1));
+					genres.set(j+1, temp2);
+					
+					int temp3 = rates.get(j);
+					rates.set(j, rates.get(j+1));
+					rates.set(j+1, temp3);
+					
+					int temp4 = prices.get(j);
+					prices.set(j, prices.get(j+1));
+					prices.set(j+1, temp4);
+				}
+				
+			}
+		}
+	}
+	private void view() {
+		if (titles.isEmpty()) {
+			System.out.println("No Movie Found");		
+		}
+		else {
+			for (int i = 0; i < titles.size(); i++) {
+				System.out.println("No        :"+ (i+1));
+				System.out.println("ID        :"+ ids.get(i));
+				System.out.println("Title     :"+ titles.get(i));
+				System.out.println("Genre     :"+ genres.get(i));
+				System.out.println("Rating    :"+ rates.get(i));
+				System.out.println("Price     :"+ prices.get(i));
+				
+			}
+		}
+	}
+		
+	private void rent () {
+		int index, money, change ;
+		view();
+		do {
+			System.out.println("Choose Movie Index[1-"+titles.size()+"] ");
+			index = scanint();
+		} while (index < 1 || index > titles.size());
+		do {
+			System.out.println("Input Money To Rent [ Min"+prices.get(index)+"] ");
+			money = scanint();
+		} while (money < prices.get(index));
+		change = money - prices.get(index);
+		do {
+			System.out.println("Pay rent Successful with"+change+"change" );
+			change = scanint();
+		} while (change < prices.get(index));
+		titles.remove(index-1);
+		rates.remove(index-1);
+		ids.remove(index-1);
+		prices.remove(index-1);
+		genres.remove(index-1);
+	}
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		new subMain();
+	}
+
+}
