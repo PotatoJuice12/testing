@@ -1,0 +1,94 @@
+import java.util.Scanner;
+import java.util.Vector;
+
+public class Potaters {
+	Scanner scan = new Scanner (System.in);
+	Vector<String> Names = new Vector<String>();
+	Vector<String> Jobs = new Vector<String>();
+	Vector<String> Descs = new Vector<String>();
+	Vector<Integer> Salaries = new Vector<Integer>();
+	public Potaters() {
+		int menu = 0;
+		
+		do {
+			System.out.println("Teryun Company");
+			System.out.println("1. Insert Employee");
+			System.out.println("2. Delete Employee");
+			System.out.println("3. Check Employee List");
+			System.out.println("4. Exit");
+			menu = scan.nextInt();
+			scan.nextLine();
+			if (menu == 1) {
+				InsertEmployee();
+			}
+			else if (menu == 2) {
+				DeleteEmployee();
+			}
+			else if (menu == 3) {
+				CheckEmployee();
+			}
+		} while (menu != 4);
+	}
+		void InsertEmployee() {
+		String name = "";
+		String job = "";
+		String desc = "";
+		Integer salary ;
+		do {
+			System.out.println("Name : ");
+			System.out.println("Mr/Mrs");
+			name = scan.nextLine();
+		} while (!name.startsWith("Mr") &&
+				!name.startsWith("Mrs"));
+		do {
+			System.out.println("Job : ");
+			System.out.println("Pixel, Sound, Movement");
+			job = scan.nextLine();
+		} while (!job.equals("Pixel") && !job.equals("Sound")
+				&& !job.equals("Movement"));
+		do {
+			System.out.println("Job Desc");
+			System.out.println("Hard, Medium, Easy");
+			desc = scan.nextLine();
+		} while (!desc.equalsIgnoreCase("Hard")&& !desc.equalsIgnoreCase("Medium")
+				&& !desc.equalsIgnoreCase("Easy"));
+		do {
+			System.out.println("Insert your salary : ");
+			salary = scan.nextInt();
+		} while (salary < 1000);
+		Names.add(name);
+		Jobs.add(job);
+		Descs.add(desc);
+		Salaries.add(salary);
+	}
+		void CheckEmployee() {
+			for (int i = 0; i < Names.size(); i++) {
+				System.out.println("Name : "+ Names.get(i));
+				System.out.println("Job : " + Jobs.get(i));
+				System.out.println("Desc : " + Descs.get(i));
+				System.out.println("Salary : " + Salaries.get(i));
+				System.out.println("===========================");
+				
+			}
+		}
+		void DeleteEmployee() {
+			CheckEmployee();
+			int idx = 0;
+			do {
+				System.out.println("Select Employee : ");
+				idx = scan.nextInt();
+				scan.nextLine();
+			} while (idx < 1 || idx > Names.size());
+			Names.remove(idx - 1);
+			Jobs.remove(idx - 1);
+			Descs.remove(idx - 1);
+			Salaries.remove(idx - 1);
+		}
+	public static void main(String[] args) {
+		new Potaters();
+		}
+				
+				
+				
+		
+		}
